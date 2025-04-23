@@ -3,11 +3,11 @@ import { useParams } from "@vkontakte/vk-mini-apps-router";
 import { Button, Panel, PanelHeader, Tabbar } from "@vkontakte/vkui";
 import { useRouteNavigator } from "@vkontakte/vk-mini-apps-router";
 
-// import Markdown from "markdown-to-jsx";
-// import hljs from "highlight.js";
-// import "highlight.js/styles/atom-one-dark.css";
+import Markdown from "markdown-to-jsx";
+import hljs from "highlight.js";
+import "highlight.js/styles/atom-one-dark.css";
 
-// import { useEffect } from "react";
+import { useEffect } from "react";
 import { Icon24ChevronLeftOutline } from "@vkontakte/icons";
 import clsx from "clsx";
 
@@ -208,11 +208,11 @@ export const TheoryItemPage = ({ id }) => {
   const theory = mockTheoryByTopic[topic];
   const routeNavigator = useRouteNavigator();
 
-  // useEffect(() => {
-  //   document.querySelectorAll("pre code").forEach((block) => {
-  //     hljs.highlightElement(block);
-  //   });
-  // }, [theory]);
+  useEffect(() => {
+    document.querySelectorAll("pre code").forEach((block) => {
+      hljs.highlightElement(block);
+    });
+  }, [theory]);
 
   if (!theory) {
     return (
@@ -248,7 +248,7 @@ export const TheoryItemPage = ({ id }) => {
             <span className={clsx("btn")}>Назад</span>
           </Button>
         </div>
-        {/* <Markdown
+        <Markdown
           options={{
             overrides: {
               pre: {
@@ -288,7 +288,7 @@ export const TheoryItemPage = ({ id }) => {
           }}
         >
           {theory.content}
-        </Markdown> */}
+        </Markdown>
 
         {theory.example && (
           <div style={{ marginTop: 24 }}>
