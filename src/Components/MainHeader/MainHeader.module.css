@@ -1,0 +1,36 @@
+@import "../../styles/variables.css";
+
+.header {
+  padding: 20px 15px;
+  font-size: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  font-weight: bold;
+  border: 0.5px solid rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.header__light {
+  background-color: var(--color-light-content);
+}
+
+.header__dark {
+  background-color: var(--color-dark-content);
+}
+
+.days {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.place {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.icon {
+  color: var(--color-dark-accent);
+}

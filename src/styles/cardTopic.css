@@ -1,0 +1,32 @@
+.row {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 0;
+  height: 75%;
+}
+
+.buttons-wrapper {
+  display: flex;
+  gap: 25px;
+  justify-content: center;
+}
+
+.check-button {
+  width: 95%;
+}
+
+.btnHover {
+  background-color: var(--colro-light-btn-stroke--hover);
+  color: white;
+}
+
+.btnActive {
+  background-color: #6767f5;
+  color: white;
+}
+
+.buttons-title {
+  color: #99a2ad;
+}

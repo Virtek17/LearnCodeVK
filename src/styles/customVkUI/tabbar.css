@@ -1,0 +1,13 @@
+/* =================== Таббар ===================== */
+/* Текст и картинка в столбик у таббара */
+.vkuiInternalTabbar--layout-horizontal .vkuiTabbarItem__in {
+  flex-direction: column;
+}
+/* Убирает у текста в таббаре отсуп слева */
+.vkuiInternalTabbar--layout-horizontal .vkuiTabbarItem__label {
+  margin-left: 0;
+}
+/* Высота таббара */
+.vkuiTabbar__host {
+  height: 55px;
+}

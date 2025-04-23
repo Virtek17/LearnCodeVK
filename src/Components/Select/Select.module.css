@@ -1,0 +1,67 @@
+@import "../../styles/variables.css";
+
+.select {
+  padding: 25px 10px;
+  border-radius: 10px;
+  background-color: var(--color-dark-content);
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+.select__light {
+  background-color: var(--color-ligth-content);
+  border: 0.5px solid var(--color-light-border);
+}
+.select__dark {
+  background-color: var(--color-dark-content);
+}
+
+.select:last-child {
+  margin-bottom: 60px;
+}
+
+.select__preview {
+  display: flex;
+  justify-content: space-between;
+}
+
+.select__name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.select__accent {
+  color: var(--color-dark-accent);
+}
+
+.select__icon {
+  transition: all 0.2s ease;
+}
+
+.select__icon_active {
+  transform: rotate(180deg);
+}
+
+.select__content {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.2s ease-in-out;
+  border: 0.5px solid var(--color-light-border);
+  border-radius: 10px;
+}
+
+.select__content_view {
+  margin-top: 24px;
+  max-height: 2000px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.select__content_row {
+  border-radius: 10px;
+  overflow: hidden;
+}

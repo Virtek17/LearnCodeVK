@@ -1,0 +1,13 @@
+@import "./variables.css";
+
+.btn {
+  font-size: 20px;
+}
+
+.btn-back__light .vkuiButton__in {
+  color: var(--color-light-text--tetritary);
+}
+
+.btn-back__dark .vkuiButton__in {
+  color: var(--color-dark-text--tetritary);
+}

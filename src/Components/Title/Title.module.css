@@ -1,0 +1,16 @@
+.title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #a297fa;
+  /* padding-left: 18px;
+  padding-bottom: 32px; */
+  padding: 32px 18px;
+}
+
+.title__light {
+  color: var(--color-light-text--secondary);
+}
+
+.title__dark {
+  color: #a297fa;
+}

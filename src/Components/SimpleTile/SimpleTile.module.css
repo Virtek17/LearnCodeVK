@@ -1,0 +1,39 @@
+@import "../../styles/variables.css";
+
+.simpleTile {
+  padding: 29px 10px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.simpleTile:not(:first-child) {
+  margin-top: 12px;
+}
+
+.simpleTile:last-child {
+  margin-bottom: 70px;
+}
+
+.simpleTile__light {
+  background-color: var(--color-light-content);
+  border: 1px solid var(--color-light-border);
+}
+.simpleTile__dark {
+  background-color: var(--color-dark-content);
+}
+
+.title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.title__light {
+  color: var(--color-light-text--primary);
+}
+
+.title__dark {
+  color: var(--color-dark-text--primary);
+}

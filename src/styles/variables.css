@@ -1,0 +1,32 @@
+:root {
+  /* Акценты */
+  --color-dark-page: #0d0e12;
+  --color-dark-content: #181725;
+  --color-dark-content--head: #212031;
+  --color-dark-content--body: #1a1925;
+  --color-dark-accent: #6767f5;
+  --color-dark-text--primary: #f5f9ff;
+  --color-dark-text--secondary: #d4cdff;
+  --color-dark-text--tetritary: #a297fa;
+  --color-dark-btn-primary--hover: #4c49a8;
+  --color-dark-btn-stroke: #d4cdff;
+  --color-dark-btn-stroke--hover: #d4cdff1a;
+
+  --color-dark-modal-head: #212031;
+  --color-dark-modal-background: #1d1c2a;
+
+  --color-light-page: #fbfbfb;
+  --color-light-content: #ffffff;
+  --color-light-modal--head: #fbfbfb;
+  --color-light-modal--body: #ffffff;
+  --color-light-accent: #4848ff;
+  --color-light-text--primary: #000000;
+  --color-light-text--secondary: #5e5e5e;
+  --color-light-text--tetritary: #919191;
+  --color-light-btn-primary--hover: #4c49a8;
+  --color-light-btn-stroke: #919191;
+  --color-light-btn-stroke--hover: #4848ff;
+  --color-light-border: #e3e3e4;
+
+  --color-checked: #b8c1cc;
+}

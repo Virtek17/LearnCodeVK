@@ -1,0 +1,85 @@
+.tile {
+  width: calc(100% - 18px);
+  display: flex;
+  position: relative;
+  cursor: pointer;
+  border: 0.5px solid #0000002c;
+  height: 120px;
+  background-color: var(--vkui--color_background_content);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.tile:not(:first-child) {
+  margin-top: 12px;
+}
+
+.tile:last-of-type {
+  margin-bottom: 70px;
+}
+
+.wrapper {
+  padding-bottom: 48px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.text {
+  margin-top: 12px;
+  font-size: 16;
+  font-weight: normal;
+  max-width: 90%;
+  word-break: normal;
+}
+
+.text__light {
+  color: var(--color-light-accent);
+}
+.text__dark {
+  color: var(--color-dark-text--secondary);
+}
+
+.img {
+  position: absolute;
+  bottom: 0px;
+  right: 30px;
+  width: 110px;
+}
+
+.progressBarBg {
+  position: absolute;
+  width: 100%;
+  height: 5px;
+  z-index: 4;
+  bottom: 0px;
+  left: 0;
+  background-color: rgba(134, 139, 134, 0.345);
+  -webkit-border-bottom-right-radius: 20px;
+  -webkit-border-bottom-left-radius: 20px;
+  -moz-border-radius-bottomright: 20px;
+  -moz-border-radius-bottomleft: 20px;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+.progressBar {
+  width: 50%;
+  height: 5px;
+  /* transform: translateX(5px, 2px); */
+  background-color: blue;
+  -webkit-border-bottom-left-radius: 20px;
+  -moz-border-radius-bottomright: 20px;
+  -moz-border-radius-bottomleft: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+@media (max-width: 500px) {
+  .img {
+    right: 10px;
+    width: 100px;
+  }
+}

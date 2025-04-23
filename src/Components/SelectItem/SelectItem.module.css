@@ -1,0 +1,56 @@
+.select {
+  padding: 20px 10px;
+}
+
+.select__light {
+  background-color: var(--color-light-modal-background);
+}
+.select__dark {
+  background-color: var(--color-dark-modal-background);
+}
+
+.select:not(:last-child) {
+  border-bottom: 0.5px solid var(--color-light-border);
+}
+
+.select__dark:hover {
+  background-color: var(--color-dark-modal-head);
+}
+.select__light:hover {
+  background-color: rgb(245, 245, 245);
+}
+
+.select_active {
+  background-color: red;
+  border: 1px solid black;
+}
+
+.select_item {
+  padding: 2px 10px;
+  display: inline-flex;
+  border-radius: 8px;
+  border: 0.5px solid var(--color-light-border);
+}
+.select_item__light {
+  background-color: var(--color-light-content--body);
+}
+
+.select_item__dark {
+  background-color: var(--color-dark-content--body);
+}
+
+.select_item__bracket__light {
+  color: var(--color-dark-text--primary);
+}
+
+.select_item__bracket__light {
+  color: var(--color-light-text--primary);
+}
+
+.select_item__text__dark {
+  color: #68caed;
+}
+
+.select_item__text__light {
+  color: #056db3;
+}

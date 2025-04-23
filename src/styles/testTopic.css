@@ -1,0 +1,79 @@
+@import "../styles/variables.css";
+
+.test-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.count {
+  font-size: 20px;
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-weight: bold;
+  display: inline;
+}
+
+.count__light {
+  color: var(--color-light-text--tetritary);
+  background-color: var(--color-light-modal--body);
+  border: 1px solid var(--color-light-border);
+}
+
+.count__dark {
+  color: var(--color-dark-text--tetritary);
+  background-color: var(--color-dark-modal-background);
+}
+.testEnd {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.testEnd__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.end-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+.result {
+  color: #4cd964;
+  font-size: 53px;
+  font-weight: bold;
+  margin-bottom: 22px;
+}
+.good {
+  color: #4cd964;
+}
+.normal {
+  color: #fff82f;
+}
+.bad {
+  color: rgb(255, 51, 5);
+}
+.img {
+  width: 202px;
+  margin-bottom: 8px;
+}
+.bottom {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.btns {
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
