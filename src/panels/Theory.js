@@ -7,26 +7,29 @@ import Tile from "../Components/Tile/Tile";
 import { useRouteNavigator } from "@vkontakte/vk-mini-apps-router";
 import supabase from "../service/supabase.js";
 import { useEffect, useState } from "react";
+import { useTheory } from "../hooks/useTheory.js";
 
 export const Theory = ({ id }) => {
   const routeNavigator = useRouteNavigator();
-  const [languages, setLanguages] = useState([]);
+  const { languages, isLoading, error, reload } = useTheory();
+  if (isLoading) return <div>Загрузка</div>;
+  // const [languages, setLanguages] = useState([]);
 
-  useEffect(() => {
-    const fetchLanguages = async () => {
-      const { data, error } = await supabase
-        .from("lang_theory")
-        .select("name , description, img");
+  // useEffect(() => {
+  //   const fetchLanguages = async () => {
+  //     const { data, error } = await supabase
+  //       .from("lang_theory")
+  //       .select("name , description, img");
 
-      if (error) {
-        console.error("Ошибка при получении данных:", error);
-      } else {
-        setLanguages(data); // сохраняем данные в state
-      }
-    };
+  //     if (error) {
+  //       console.error("Ошибка при получении данных:", error);
+  //     } else {
+  //       setLanguages(data); // сохраняем данные в state
+  //     }
+  //   };
 
-    fetchLanguages();
-  }, []);
+  //   fetchLanguages();
+  // }, []);
 
   // const listTheoryLanguage = [
   //   { title: "HTML", text: "Структура веб страницы", img: "kabanThinking" },
