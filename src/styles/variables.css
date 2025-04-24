@@ -29,4 +29,10 @@
   --color-light-border: #e3e3e4;
 
   --color-checked: #b8c1cc;
+
+  --color-light-skeleton-start: #eae9e9;
+  --color-light-skeleton-end: #eae9ff;
+
+  --color-dark-skeleton-start: #212031;
+  --color-dark-skeleton-end: #3b3a4d;
 }

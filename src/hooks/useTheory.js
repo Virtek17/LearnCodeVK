@@ -9,7 +9,7 @@ export const useTheory = () => {
   const loadLanguages = useCallback(async () => {
     try {
       setIsLoading(true);
-      const data = await TheoryApi.fetchLanguages();
+      const data = await TheoryApi.getTheoryLanguages();
       setLanguages(data);
     } catch (err) {
       setError(err.message);

@@ -93,9 +93,13 @@ body::-webkit-scrollbar-thumb {
   background-color: var(--color-dark-page);
 }
 
+.vkuiSkeleton__host .vkuiRootComponent__host {
+  margin-bottom: 12px;
+}
+
 @media (max-width: 768px) {
-  .myCustomThemeTokens--dark .vkuiPanel .vkuiPanel__in,
-  .vkuiPanel:before {
+  .myCustomThemeTokens--dark .vkuiPanel__modeNone .vkuiPanel__in,
+  .vkuiPanel__modePlain .vkuiPanel__in {
     background-color: var(--color-dark-page);
   }
 }

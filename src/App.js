@@ -9,8 +9,8 @@ import {
   Cards,
   CardTopic,
   Theory,
+  TheoryTheme,
   TheoryTopic,
-  TheoryItemPage,
   Tests,
   TestDirection,
   TestSubject,
@@ -42,8 +42,8 @@ export const App = () => {
           <Cards id="cards" />
           <CardTopic id="cardTopic" />
           <Theory id="theory" />
+          <TheoryTheme id="theoryTheme" />
           <TheoryTopic id="theoryTopic" />
-          <TheoryItemPage id="theoryItemPage" />
           <Tests id="tests" />
           <TestDirection id="testDirection" />
           <TestSubject id="testSubject" />

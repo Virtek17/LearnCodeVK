@@ -2,9 +2,9 @@ import supabase from "./supabase";
 
 export const TheoryApi = {
   // Получение языков
-  fetchLanguages: async () => {
+  getTheoryLanguages: async () => {
     const { data, error } = await supabase
-      .from("lang_theory")
+      .from("theory_lang")
       .select("name, description, img");
 
     if (error) throw new Error(error.message);
@@ -12,21 +12,29 @@ export const TheoryApi = {
   },
 
   // получение темы
-  fetchTopics: async (lang) => {
-    const { data, error } = await supabase.from("Theory_articles").select(`
+  getTheme: async (lang) => {
+    const { data, error } = await supabase
+      .from("theory_lang")
+      .select(
+        `
+        name,
+        theory_theme (
+          title,
+          icon_name,
+          theory_topic (
             title,
             tag,
-            end,
-            TheorySection (
-              title,
-              icon_name,
-              lang_theory (
-                name
-              )
-            )
-          `);
+            end
+          )
+        )
+      `
+      )
+      .eq("name", lang); // Фильтр по имени языка
 
     if (error) throw new Error(error.message);
-    return data;
+
+    const result = data[0];
+
+    return result;
   },
 };
