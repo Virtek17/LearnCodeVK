@@ -6,7 +6,6 @@ import clsx from "clsx";
 
 const MainHeader = ({ day, place }) => {
   const appearance = useAppearance();
-  console.log("appearance: ", appearance);
   return (
     <div
       className={clsx(style.header, {

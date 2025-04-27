@@ -37,4 +37,12 @@ export const TheoryApi = {
 
     return result;
   },
+
+  // получение фразы
+  getPhrase: async () => {
+    const { data, error } = await supabase.from("phrases").select("text");
+
+    if (error) throw new Error(error.message);
+    return data;
+  },
 };

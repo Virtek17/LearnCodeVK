@@ -1,0 +1,50 @@
+@import "../../styles/variables.css";
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+  background-color: #0000006a;
+  margin: 0 auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 212;
+}
+
+.content {
+  padding: 18px 16px 20px;
+  background-color: var(--color-light-content);
+  position: absolute;
+  bottom: 70px;
+  left: 50%;
+  transform: translate(-50%);
+  width: 70%;
+  border-radius: 10px;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.counter {
+  color: var(--color-light-text--secondary);
+}
+.title {
+  margin-top: 30px;
+  font-size: 20px;
+  color: var(--color-light-primary);
+}
+.text {
+  margin-top: 8px;
+  font-size: 16px;
+  color: var(--color-light-text--secondary);
+}
+.btnWrapper {
+  display: flex;
+  margin-top: 30px;
+  gap: 10px;
+  width: 100%;
+}
+.close {
+  cursor: pointer;
+}

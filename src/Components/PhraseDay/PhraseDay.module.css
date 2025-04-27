@@ -1,0 +1,37 @@
+@import "../../styles/variables.css";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  gap: 20px;
+  text-align: center;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: bold;
+}
+.title__light {
+  color: var(--color-light-text--primary);
+}
+.title__dark {
+  color: var(--color-dark-text--tetritary);
+}
+
+.text {
+  font-size: 20px;
+  font-weight: bold;
+}
+.text__light {
+  color: var(--color-light-text--tetritary);
+}
+.text__dark {
+  color: var(--color-dark-text--primary);
+}
+
+.img {
+  max-width: 258px;
+  margin-top: 20px;
+}

@@ -264,7 +264,7 @@ export const TestTopic = ({ id }) => {
             <div className="testEnd__content">
               <div className="end-title">
                 {procentCorrectAnswer >= 90
-                  ? "Чисто вынес этот тест"
+                  ? "Ну ты внатуре кабан"
                   : procentCorrectAnswer <= 40
                   ? "Боже ты вообще не готов"
                   : "Старайся лучше!"}

@@ -1,6 +1,7 @@
 @import "./styles/variables.css";
 
 @import "./styles/customVkUI/tabbar.css";
+@import "./styles/customVkUI/onbording.css";
 
 body::-webkit-scrollbar {
   width: 5px; /* Ширина всего элемента навигации */
