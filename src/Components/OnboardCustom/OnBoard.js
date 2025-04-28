@@ -4,7 +4,8 @@ import { useState } from "react";
 import clsx from "clsx";
 import { Button } from "@vkontakte/vkui";
 import { Icon24Dismiss } from "@vkontakte/icons";
-export const OnBoard = () => {
+import { useAppearance } from "@vkontakte/vk-bridge-react";
+export const OnBoard = ({ onClose }) => {
   const [activeBoard, setActiveBoard] = useState(0);
   const [showBoard, setShowBoard] = useState(true);
   const content = [
@@ -29,30 +30,46 @@ export const OnBoard = () => {
       text: "Читай, вбивай в башку, двигайся дальше. Удачи... хотя, если честно, тебе тут не удача нужна, а башка рабочая.",
     },
   ];
+  const appearance = useAppearance();
 
   return (
     <>
       {content.length > activeBoard && showBoard ? (
         <div className={style.wrapper}>
-          <div className={style.content}>
+          <div
+            className={clsx(style.content, {
+              [style.content__light]: appearance === "light",
+              [style.content__dark]: appearance !== "light",
+            })}
+          >
             <div className={style.header}>
-              <div className={style.counter}>
+              <div className={clsx(style.counter)}>
                 {activeBoard + 1} / {content.length}
               </div>
-              <div onClick={() => setShowBoard(false)} className={style.close}>
+              <div onClick={onClose} className={style.close}>
                 <Icon24Dismiss />
               </div>
             </div>
 
             <div className={style.temp}>
-              <div className={clsx(style.title)}>
+              <div
+                className={clsx(style.title, {
+                  [style.title__light]: appearance === "light",
+                  [style.title__dark]: appearance !== "light",
+                })}
+              >
                 {content[activeBoard].title}
               </div>
-              <div className={clsx(style.text)}>
+              <div
+                className={clsx(style.text, {
+                  [style.text__light]: appearance === "light",
+                  [style.text__dark]: appearance !== "light",
+                })}
+              >
                 {content[activeBoard].text}
               </div>
               <div className={clsx(style.btnWrapper)}>
-                <Button stretched onClick={() => setShowBoard(false)}>
+                <Button stretched onClick={onClose}>
                   <span>Пропустить</span>
                 </Button>
                 <Button
@@ -74,4 +91,5 @@ export const OnBoard = () => {
 
 OnBoard.propTypes = {
   id: PropTypes.string,
+  onClose: PropTypes.func,
 };

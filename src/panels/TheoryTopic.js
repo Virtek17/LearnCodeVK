@@ -11,9 +11,11 @@ import { useEffect } from "react";
 import { Icon24ChevronLeftOutline } from "@vkontakte/icons";
 import clsx from "clsx";
 
+import MainContainer from "../Components/MainContainer/MainContainer";
 import MyTabbar from "../Components/MyTabbar/MyTabbar";
 import "../styles/TheoryTopic.css";
 import { useAppearance } from "@vkontakte/vk-bridge-react";
+import { BlockedModal } from "../Components/BlockedModal/BlockedModal";
 
 // заглушка
 const mockTheoryByTopic = {
@@ -217,9 +219,9 @@ export const TheoryTopic = ({ id }) => {
     return (
       <Panel id={id}>
         <PanelHeader>Ошибка</PanelHeader>
-        <div style={{ padding: 16 }}>
-          Теория по теме <strong>{topic}</strong> не найдена.
-        </div>
+        <MainContainer>
+          <BlockedModal />
+        </MainContainer>
         <Tabbar>
           <MyTabbar />
         </Tabbar>
@@ -275,12 +277,28 @@ export const TheoryTopic = ({ id }) => {
               },
               h4: {
                 component: (props) => (
-                  <h4 style={{ fontSize: 18, marginTop: 24 }} {...props} />
+                  <h4
+                    style={{
+                      fontSize: "20px",
+                      marginTop: "24px",
+                      fontFamily: "SFProText",
+                      fontWeight: "600",
+                    }}
+                    {...props}
+                  />
                 ),
               },
               p: {
                 component: (props) => (
-                  <p style={{ fontSize: 16, lineHeight: "1.5em" }} {...props} />
+                  <p
+                    style={{
+                      fontSize: "16px",
+                      lineHeight: "1.5em",
+                      fontFamily: "SFProText",
+                      fontWeight: "400",
+                    }}
+                    {...props}
+                  />
                 ),
               },
             },
@@ -294,11 +312,11 @@ export const TheoryTopic = ({ id }) => {
             <h4>🧠 Пример:</h4>
             <pre
               style={{
-                backgroundColor: "#111",
-                color: "#f8f8f2",
+                backgroundColor: "#24292E",
+                color: "#0080FF",
                 padding: "12px",
                 borderRadius: "8px",
-                fontSize: 14,
+                fontSize: 18,
                 overflowX: "auto",
               }}
             >

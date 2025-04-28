@@ -30,6 +30,8 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  font-family: SFProText;
+  font-weight: 600;
 }
 
 .select__accent {

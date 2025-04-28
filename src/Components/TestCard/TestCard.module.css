@@ -4,6 +4,9 @@
 }
 .question {
   font-size: 20px;
+  font-family: SFProText;
+  font-weight: 300;
+  margin-bottom: 20px;
 }
 
 .question__light {
@@ -17,7 +20,7 @@
 .variants {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
   padding-left: 0;
 }
 .variants__item {
@@ -25,6 +28,10 @@
   display: inline-flex;
   gap: 20px;
   align-items: center;
+}
+.variant_text {
+  font-family: SFProText;
+  font-weight: 400;
 }
 
 /* Стили для кастомного радио */
@@ -42,40 +49,6 @@
   width: 0;
   height: 0;
 }
-/* Стили для выбранного состояния
-.variants__item__selected {
-  background-color: var(--color-background-tertiary);
-}
-
-.variants__item__selected.variants__item__light label {
-  background-color: var(--color-light-background-tertiary);
-}
-
-.variants__item__selected.variants__item__dark label {
-  background-color: var(--color-dark-background-tertiary);
-} */
-
-/* .variants__item__light label::before {
-  border: 2px solid var(--color-checked);
-}
-
-.variants__item__dark label::before {
-  border: 2px solid var(--color-checked);
-} */
-
-/* Выбранный вариант (общие стили) */
-/* .variants__item input[type="radio"]:checked + label {
-  border-color: rgb(29, 105, 237);
-  background-color: aquamarine;
-}
-.variants__item__correct input[type="radio"]:checked + label {
-  background-color: rgb(0, 255, 17);
-  border-color: rgb(0, 255, 17);
-}
-.variants__item__uncorrect input[type="radio"]:checked + label {
-  background-color: rgb(255, 0, 0);
-  border-color: rgb(255, 0, 0);
-} */
 
 .variants__item__selected .label {
   background-color: #1d69ed; /* Светло-голубой */
@@ -104,17 +77,6 @@
 .variants__item input[type="radio"]:checked + .label {
   border-color: #ddd;
 }
-
-/* .variants__item input[type="radio"]:checked + .label::after {
-  content: "";
-  position: absolute;
-  top: 3px;
-  left: 3px;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #1d69ed;
-} */
 
 /* Специфичные стили для правильных/неправильных выбранных вариантов */
 .variants__item__correct input[type="radio"]:checked + .label {

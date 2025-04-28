@@ -63,16 +63,21 @@
 
 .card__title {
   font-size: 20px;
+  font-family: SFProText;
+  font-weight: 600;
 }
 
 .card__number {
   color: #6767f5;
   font-size: 20px;
+  font-family: SFProText;
+  font-weight: 400;
 }
 
 .question {
   font-size: 16px;
-  font-weight: bold;
+  font-family: SFProText;
+  font-weight: 600;
 }
 
 .question__dark {

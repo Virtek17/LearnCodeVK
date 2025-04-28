@@ -8,8 +8,9 @@
 }
 
 .title {
-  font-weight: bold;
   font-size: 24px;
+  font-family: SFProText;
+  font-weight: 600;
 }
 
 .count {
@@ -18,6 +19,8 @@
   border-radius: 10px;
   font-weight: bold;
   display: inline;
+  font-family: SFProText;
+  font-weight: 600;
 }
 
 .count__light {

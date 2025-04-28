@@ -64,7 +64,7 @@ export const TestTopic = ({ id }) => {
         },
         {
           question: "Какой тег НЕ является заголовком?",
-          answer: "",
+          answer: "<p>",
           variant: ["<h3>", "<h5>", "<p>", "<h6>"],
         },
         {

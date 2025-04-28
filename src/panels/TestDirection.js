@@ -51,7 +51,7 @@ export const TestDirection = ({ id }) => {
   );
 
   if (!theme) {
-    return <div>Тестов по {direction} нет</div>;
+    return <div>иди нахуй</div>;
   }
 
   return (

@@ -1,0 +1,56 @@
+@import "../../styles/variables.css";
+
+.wrapper {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 16px;
+
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+.icon {
+  background-color: var(--color-dark-modal-head);
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+.icon svg {
+  fill: var(--color-dark-text--tetritary);
+}
+.title {
+  font-size: 20px;
+  font-family: SFProText;
+  font-weight: 500;
+}
+.title__dark {
+  color: var(--color-dark-text--primary);
+}
+.title__light {
+  color: var(--color-light-text--primary);
+}
+
+.text {
+  font-size: 16px;
+  font-family: SFProText;
+  font-weight: 400;
+  text-align: center;
+}
+.text__light {
+  color: var(--color-light-text--secondary);
+}
+.text__dark {
+  color: var(--color-dark-text--tetritary);
+}
+
+.btn {
+  max-height: 40px;
+  width: 100%;
+  margin-top: 24px;
+}
+
+.img {
+  max-width: 200px;
+}

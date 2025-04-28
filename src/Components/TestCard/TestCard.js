@@ -85,7 +85,7 @@ export const TestCard = ({
                   htmlFor={`radio${index}`}
                   className={style.label}
                 ></label>
-                <div>{element}</div>
+                <div className={style.variant_text}>{element}</div>
               </li>
             );
           })}

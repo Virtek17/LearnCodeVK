@@ -2,6 +2,9 @@
 
 .btn {
   font-size: 20px;
+
+  font-family: SFProText;
+  font-weight: 600;
 }
 
 .btn-back__light .vkuiButton__in {

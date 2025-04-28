@@ -1,10 +1,8 @@
 .title {
   font-size: 20px;
-  font-weight: bold;
-  color: #a297fa;
-  /* padding-left: 18px;
-  padding-bottom: 32px; */
   padding: 32px 18px;
+  font-family: SFProText;
+  font-weight: 600;
 }
 
 .title__light {

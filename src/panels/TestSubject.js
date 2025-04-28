@@ -7,6 +7,7 @@ import SimpleTile from "../Components/SimpleTile/SimpleTile";
 import { useParams, useRouteNavigator } from "@vkontakte/vk-mini-apps-router";
 import { Icon24ChevronLeftOutline } from "@vkontakte/icons";
 import clsx from "clsx";
+import { BlockedModal } from "../Components/BlockedModal/BlockedModal";
 
 export const TestSubject = ({ id }) => {
   const { direction, subject } = useParams(); // Получаем тему из URL
@@ -78,7 +79,7 @@ export const TestSubject = ({ id }) => {
   const needDirection = directions.filter((item) => item.title === subject);
 
   if (!theme) {
-    return <div>Тестов по {subject} нет</div>;
+    return <BlockedModal />;
   }
 
   return (

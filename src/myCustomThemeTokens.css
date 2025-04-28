@@ -1,8 +1,30 @@
 @import "./styles/variables.css";
 
 @import "./styles/customVkUI/tabbar.css";
-@import "./styles/customVkUI/onbording.css";
-
+@font-face {
+  font-family: SFProText;
+  src: url("./fonts/SFProText-Medium.woff2");
+  font-weight: 500;
+}
+@font-face {
+  font-family: SFProText;
+  src: url("./fonts/SFProText-Regular.woff2");
+  font-weight: 400;
+}
+@font-face {
+  font-family: SFProText;
+  src: url("./fonts/SFProText-Bold.woff2");
+  font-weight: 600;
+}
+@font-face {
+  font-family: SFProText;
+  src: url("./fonts/SFProText-Light.woff2");
+  font-weight: 300;
+}
+body {
+  font-family: SFProText;
+  font-weight: 500;
+}
 body::-webkit-scrollbar {
   width: 5px; /* Ширина всего элемента навигации */
 }

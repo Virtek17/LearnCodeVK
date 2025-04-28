@@ -13,7 +13,6 @@
 
 .content {
   padding: 18px 16px 20px;
-  background-color: var(--color-light-content);
   position: absolute;
   bottom: 70px;
   left: 50%;
@@ -21,6 +20,13 @@
   width: 70%;
   border-radius: 10px;
 }
+.content__light {
+  background-color: var(--color-light-content);
+}
+.content__dark {
+  background-color: var(--color-dark-modal-background);
+}
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -28,17 +34,30 @@
 }
 .counter {
   color: var(--color-light-text--secondary);
+  font-size: 20px;
 }
 .title {
   margin-top: 30px;
   font-size: 20px;
+}
+.title__light {
   color: var(--color-light-primary);
 }
+.title__dark {
+  color: var(--color-dark-text--primary);
+}
+
 .text {
   margin-top: 8px;
   font-size: 16px;
+}
+.text__light {
   color: var(--color-light-text--secondary);
 }
+.text__dark {
+  color: var(--color-dark-text--tetritary);
+}
+
 .btnWrapper {
   display: flex;
   margin-top: 30px;
