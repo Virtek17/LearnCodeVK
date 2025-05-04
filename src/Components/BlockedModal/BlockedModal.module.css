@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
   gap: 16px;
 
   max-width: 360px;

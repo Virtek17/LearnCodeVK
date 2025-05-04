@@ -5,30 +5,37 @@ import Title from "../Components/Title/Title";
 import MainContainer from "../Components/MainContainer/MainContainer";
 import Tile from "../Components/Tile/Tile";
 import { useRouteNavigator } from "@vkontakte/vk-mini-apps-router";
+import { useTestDirection } from "../hooks/useTestDirection";
+import { BaseSkeleton } from "../Components/Skeletons/BaseSkeleton/BaseSkeleton";
 
 export const Tests = ({ id }) => {
   const routeNavigator = useRouteNavigator();
-  const directions = [
-    {
-      title: "Frontend",
-      text: "HTML, CSS, JavaScript",
-      img: "kabanFrontend",
-    },
-    { title: "Backend", text: "C#, PHP", img: "kabanBackend" },
-  ];
+
+  const { testDirection, isLoading, error } = useTestDirection();
+  console.log(testDirection);
+
+  if (isLoading)
+    return (
+      <>
+        <PanelHeader>Тесты</PanelHeader>
+        <BaseSkeleton />
+      </>
+    );
+
+  if (error) console.log(error);
 
   return (
     <Panel id={id}>
       <PanelHeader>Тесты</PanelHeader>
       <Title title={"Направления разработки"} />
       <MainContainer>
-        {directions.map(({ title, text, img }) => (
+        {testDirection.map(({ direction, description, img }) => (
           <Tile
-            key={title}
-            title={title}
-            text={text}
+            key={direction}
+            title={direction}
+            text={description}
             img={img}
-            onClick={() => routeNavigator.push(`/tests/${title}`)}
+            onClick={() => routeNavigator.push(`/tests/${direction}`)}
           />
         ))}
       </MainContainer>

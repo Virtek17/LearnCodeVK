@@ -6,6 +6,8 @@ import MyTabbar from "../Components/MyTabbar/MyTabbar";
 import Title from "../Components/Title/Title";
 import MainContainer from "../Components/MainContainer/MainContainer";
 import { TestCard } from "../Components/TestCard/TestCard";
+import { BlockedModal } from "../Components/BlockedModal/BlockedModal";
+
 import kabanNormal from "../assets/Kabans/kaban-busy.svg";
 import kabanAngry from "../assets/Kabans/kaban-angry.svg";
 import kabanGood from "../assets/Kabans/kaban-strong.svg";
@@ -218,10 +220,8 @@ export const TestTopic = ({ id }) => {
     setChecked(false);
   };
 
-  // const needDirection = directions.filter((item) => item.title === topic);
-
   if (!theme) {
-    return <div>Тестов по {topic} нет</div>;
+    return <BlockedModal />;
   }
   let correctAnswersCount = theme.tests.length - uncorrectedAnswersCount;
   let procentCorrectAnswer = (correctAnswersCount * 100) / theme.tests.length;
