@@ -22,5 +22,5 @@ const Title = ({ title }) => {
 
 export default Title;
 Title.propTypes = {
-  title: PropTypes.string.isRequired, // Ожидаем число, обязательный пропс
+  title: PropTypes.string, // Ожидаем число, обязательный пропс
 };

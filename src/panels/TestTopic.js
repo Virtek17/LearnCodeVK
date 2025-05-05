@@ -18,193 +18,109 @@ import clsx from "clsx";
 import "../styles/testTopic.css";
 import { Icon20ErrorCircle } from "@vkontakte/icons";
 import { useAppearance } from "@vkontakte/vk-bridge-react";
+import { useTest } from "../hooks/useTest";
 
 export const TestTopic = ({ id }) => {
   const [activeTest, setActiveTest] = useState(0);
   const { topic, direction, subject } = useParams();
   const appearance = useAppearance();
-  const directions = [
-    {
-      title: "Основы HTML",
-      tests: [
-        {
-          question: "Какой тэг указывает на тип документа",
-          answer: "<!DOCTYPE html>",
-          variant: ["<!html>", "<document>", "<!DOCTYPE html>", "<html>"],
-        },
-        {
-          question: "Какой тег является корневым элементом HTML-страницы?",
-          answer: "<html>",
-          variant: ["<head>", "<html>", "<body>", "<!DOCTYPE>"],
-        },
-        {
-          question:
-            "Какой раздел содержит метаинформацию о странице (например, заголовок, кодировку)",
-          answer: "<head>",
-          variant: ["<head>", "<body>", "<footer>", "<meta>"],
-        },
-        {
-          question: "Где должен располагаться контент, видимый пользователю?",
-          answer: "<body>",
-          variant: ["<head>", "<body>", "<html>", "<!DOCTYPE>"],
-        },
-        {
-          question:
-            "Какой элемент определяет заголовок, отображаемый в строке заголовка или на вкладке браузера?",
-          answer: "<title>",
-          variant: ["<title>", "<body>", "<head>", "<meta>"],
-        },
-        {
-          question: "Какой тег используется для самого важного заголовка?",
-          answer: "<h1>",
-          variant: ["<h1>", "<h2>", "<title>", "<header>"],
-        },
-        {
-          question: "Сколько уровней заголовков существует в HTML?",
-          answer: "6",
-          variant: ["3", "5", "6", "4"],
-        },
-        {
-          question: "Какой тег НЕ является заголовком?",
-          answer: "<p>",
-          variant: ["<h3>", "<h5>", "<p>", "<h6>"],
-        },
-        {
-          question: "Какой тег создаёт абзац?",
-          answer: "<p>",
-          variant: ["<a>", "<p>", "<br>", "<hr>"],
-        },
-        {
-          question:
-            "Какой тег используется для переноса строки без создания нового абзаца?",
-          answer: "<br>",
-          variant: ["<hr>", "<p>", "<div>", "<br>"],
-        },
-        {
-          question: "Какой тег создаёт горизонтальную линию?",
-          answer: "<hr>",
-          variant: ["<line>", "<hr>", "<br>", "<p>"],
-        },
-        {
-          question: "Как правильно добавить комментарий в HTML?",
-          answer: "<!-- Это комментарий -->",
-          variant: [
-            "// Это комментарий",
-            "/* Это комментарий */",
-            "<!-- Это комментарий -->",
-            "<! Это комментарий>",
-          ],
-        },
-        {
-          question: "Видны ли HTML-комментарии пользователю?",
-          answer: "Только при просмотре кода страницы",
-          variant: [
-            "Да, они отображаются на странице",
-            "Только если навести курсор",
-            "Зависит от браузера",
-            "Только при просмотре кода страницы",
-          ],
-        },
-        {
-          question: "Что произойдёт, если написать <h7>Текст</h7>?",
-          answer: "Текст отобразится как обычный (без стилей заголовка)",
-          variant: [
-            "Браузер выведет ошибку",
-            "Текст будет крупнее, чем в <h6>",
-            "Текст отобразится как обычный (без стилей заголовка)",
-            "Браузер проигнорирует этот тег",
-          ],
-        },
-      ],
-    },
-    {
-      title: "Форматирование текста",
-      tests: [
-        {
-          question: "Какой тег делает текст жирным без семантической важности?",
-          answer: "<b>",
-          variant: ["<b>", "<strong>", "<bold>", "<em>"],
-        },
-        {
-          question: "Чем отличается <strong> от <b>?",
-          answer:
-            "<strong> указывает на важность текста, <b> — просто жирное начертание",
-          variant: [
-            "Ничем, это синонимы",
-            "<strong> указывает на важность текста, <b> — просто жирное начертание",
-            "<b> работает только в старых браузерах",
-            "<strong> нельзя использовать внутри <p>",
-          ],
-        },
-        {
-          question:
-            "Какой тег делает текст курсивом без семантического акцента?",
-          answer: "<i>",
-          variant: ["<i>", "<em>", "<italic>", "<cursive>"],
-        },
-        {
-          question: "Когда стоит использовать <em>?",
-          answer: "Для текста, который нужно интонационно выделить",
-          variant: [
-            "Для всех курсивных слов",
-            "Только внутри таблиц",
-            "Для цитат",
-            "Для текста, который нужно интонационно выделить",
-          ],
-        },
-        {
-          question: "Какой тег подчёркивает текст?",
-          answer: "<u>",
-          variant: ["<ins>", "<u>", "<underline>", "<strike>"],
-        },
-        {
-          question: "Какой тег зачёркивает текст?",
-          answer: "<s>",
-          variant: ["<s>", "<del>", "<strike>", "<u>"],
-        },
-        {
-          question:
-            "Какой тег создаёт верхний индекс (например, степень числа)?",
-          answer: "<sup>",
-          variant: ["<top>", "<sub>", "<up>", "<sup>"],
-        },
-        {
-          question: "Какой тег используют для химических формул (H₂O)?",
-          answer: "<sub>",
-          variant: ["<sup>", "<sub>", "<low>", "<chem>"],
-        },
-        {
-          question: "Какой тег сохраняет пробелы и переносы строк?",
-          answer: "<pre>",
-          variant: ["<pre>", "<code>", "<p>", "<plaintext>"],
-        },
-        {
-          question: "Какой тег используется для цитирования длинного текста?",
-          answer: "<blockquote>",
-          variant: ["<p>", "<cite>", "<blockquote>", "<q>"],
-        },
-        {
-          question: "Какой тег выделяет код программы?",
-          answer: "<code>",
-          variant: ["<program>", "<pre>", "<code>", "<script>"],
-        },
-        {
-          question: "Какой код правильно оформляет текст: 'Важно: 2³ = 8'?",
-          answer: "<p><strong>Важно:</strong> 2<sup>3</sup> = 8</p>",
-          variant: [
-            "<strong>Важно: 2<sup>3</sup> = 8</strong>",
-            "<p><strong>Важно:</strong> 2<sup>3</sup> = 8</p>",
-            "<b>Важно: 2<up>3</up> = 8</b>",
-            "<em>Важно: 2<sub>3</sub> = 8</em>",
-          ],
-        },
-      ],
-    },
-  ];
-  const theme = directions.find((item) => item.title === topic);
+  // const directions = [
+  //   {
+  //     title: "Основы HTML",
+
+  //   {
+  //     title: "Форматирование текста",
+  //     tests: [
+  //       {
+  //         question: "Какой тег делает текст жирным без семантической важности?",
+  //         answer: "<b>",
+  //         variant: ["<b>", "<strong>", "<bold>", "<em>"],
+  //       },
+  //       {
+  //         question: "Чем отличается <strong> от <b>?",
+  //         answer:
+  //           "<strong> указывает на важность текста, <b> — просто жирное начертание",
+  //         variant: [
+  //           "Ничем, это синонимы",
+  //           "<strong> указывает на важность текста, <b> — просто жирное начертание",
+  //           "<b> работает только в старых браузерах",
+  //           "<strong> нельзя использовать внутри <p>",
+  //         ],
+  //       },
+  //       {
+  //         question:
+  //           "Какой тег делает текст курсивом без семантического акцента?",
+  //         answer: "<i>",
+  //         variant: ["<i>", "<em>", "<italic>", "<cursive>"],
+  //       },
+  //       {
+  //         question: "Когда стоит использовать <em>?",
+  //         answer: "Для текста, который нужно интонационно выделить",
+  //         variant: [
+  //           "Для всех курсивных слов",
+  //           "Только внутри таблиц",
+  //           "Для цитат",
+  //           "Для текста, который нужно интонационно выделить",
+  //         ],
+  //       },
+  //       {
+  //         question: "Какой тег подчёркивает текст?",
+  //         answer: "<u>",
+  //         variant: ["<ins>", "<u>", "<underline>", "<strike>"],
+  //       },
+  //       {
+  //         question: "Какой тег зачёркивает текст?",
+  //         answer: "<s>",
+  //         variant: ["<s>", "<del>", "<strike>", "<u>"],
+  //       },
+  //       {
+  //         question:
+  //           "Какой тег создаёт верхний индекс (например, степень числа)?",
+  //         answer: "<sup>",
+  //         variant: ["<top>", "<sub>", "<up>", "<sup>"],
+  //       },
+  //       {
+  //         question: "Какой тег используют для химических формул (H₂O)?",
+  //         answer: "<sub>",
+  //         variant: ["<sup>", "<sub>", "<low>", "<chem>"],
+  //       },
+  //       {
+  //         question: "Какой тег сохраняет пробелы и переносы строк?",
+  //         answer: "<pre>",
+  //         variant: ["<pre>", "<code>", "<p>", "<plaintext>"],
+  //       },
+  //       {
+  //         question: "Какой тег используется для цитирования длинного текста?",
+  //         answer: "<blockquote>",
+  //         variant: ["<p>", "<cite>", "<blockquote>", "<q>"],
+  //       },
+  //       {
+  //         question: "Какой тег выделяет код программы?",
+  //         answer: "<code>",
+  //         variant: ["<program>", "<pre>", "<code>", "<script>"],
+  //       },
+  //       {
+  //         question: "Какой код правильно оформляет текст: 'Важно: 2³ = 8'?",
+  //         answer: "<p><strong>Важно:</strong> 2<sup>3</sup> = 8</p>",
+  //         variant: [
+  //           "<strong>Важно: 2<sup>3</sup> = 8</strong>",
+  //           "<p><strong>Важно:</strong> 2<sup>3</sup> = 8</p>",
+  //           "<b>Важно: 2<up>3</up> = 8</b>",
+  //           "<em>Важно: 2<sub>3</sub> = 8</em>",
+  //         ],
+  //       },
+  //     ],
+  //   },
+  // ];
+
+  // const theme = directions.find((item) => item.title === topic);
+
   const [checked, setChecked] = useState(false); // выбрали вариант ответа
   const [uncorrectedAnswersCount, setUncorrectedAnswersCount] = useState(0);
   const routeNavigator = useRouteNavigator();
+
+  const { tests, isLoading, error, countTests } = useTest(topic);
+  console.log(topic);
 
   const handleUncorrectAnswer = (count) => {
     setUncorrectedAnswersCount(count);
@@ -220,18 +136,28 @@ export const TestTopic = ({ id }) => {
     setChecked(false);
   };
 
-  if (!theme) {
+  // сделать скелетон для тестов
+  if (isLoading) {
+    return <div>Загрузка...</div>;
+  }
+
+  if (error) {
+    console.log(error);
+  }
+
+  if (tests.length == 0) {
     return <BlockedModal />;
   }
-  let correctAnswersCount = theme.tests.length - uncorrectedAnswersCount;
-  let procentCorrectAnswer = (correctAnswersCount * 100) / theme.tests.length;
+
+  let correctAnswersCount = countTests - uncorrectedAnswersCount;
+  let procentCorrectAnswer = (correctAnswersCount * 100) / countTests;
 
   return (
     <Panel id={id}>
       <PanelHeader>Тесты</PanelHeader>
       <Title title={topic} />
       <MainContainer>
-        {theme.tests.length > activeTest ? (
+        {countTests > activeTest ? (
           <>
             <div className="test-header">
               <div className="title">Вопрос: </div>
@@ -241,14 +167,14 @@ export const TestTopic = ({ id }) => {
                   ["count__dark"]: appearance !== "light",
                 })}
               >
-                {activeTest + 1} / {theme.tests.length}
+                {activeTest + 1} / {countTests}
               </div>
             </div>
 
             <TestCard
-              question={theme.tests[activeTest].question}
-              answer={theme.tests[activeTest].answer}
-              variant={theme.tests[activeTest].variant}
+              question={tests[activeTest].question}
+              answer={tests[activeTest].answer}
+              variant={tests[activeTest].variant}
               checked={checked}
               onUncorrectedAnswer={handleUncorrectAnswer} // передаем callback
             />
@@ -277,7 +203,7 @@ export const TestTopic = ({ id }) => {
                     procentCorrectAnswer > 40 && procentCorrectAnswer < 90,
                 })}
               >
-                {correctAnswersCount} / {theme.tests.length}
+                {correctAnswersCount} / {countTests}
               </div>
               <div className="img">
                 <img

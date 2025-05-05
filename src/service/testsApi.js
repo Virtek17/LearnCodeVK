@@ -51,4 +51,30 @@ export const testsApi = {
     if (error) throw new Error(error.message);
     return data || null;
   },
+
+  getTest: async (topic) => {
+    const { data, error } = await supabase
+      .from("test_subject")
+      .select(
+        ` 
+        text,
+        test(
+          answer, 
+          question, 
+          variant
+        )
+        `
+      )
+      .eq("text", topic);
+
+    const transformedData = data.map((subject) => ({
+      ...subject,
+      test: subject.test.map((testItem) => ({
+        ...testItem,
+        variant: testItem.variant.split(",").map((v) => v.trim()),
+      })),
+    }));
+    if (error) throw new Error(error.message);
+    return transformedData[0].test || null;
+  },
 };

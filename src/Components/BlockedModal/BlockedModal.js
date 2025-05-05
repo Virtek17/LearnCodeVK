@@ -11,7 +11,12 @@ export const BlockedModal = () => {
   return (
     <div className={style.wrapper}>
       <img src={kaban} className={style.img} />
-      <div className={style.icon}>
+      <div
+        className={clsx(style.icon, {
+          [style.icon__light]: appearance === "light",
+          [style.icon__dark]: appearance !== "light",
+        })}
+      >
         <Icon24LockOutline />
       </div>
       <div
