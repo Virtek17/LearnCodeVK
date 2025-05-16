@@ -12,7 +12,6 @@ export const Tests = ({ id }) => {
   const routeNavigator = useRouteNavigator();
 
   const { testDirection, isLoading, error } = useTestDirection();
-  console.log(testDirection);
 
   if (isLoading)
     return (

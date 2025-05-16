@@ -15,6 +15,7 @@ import {
   TestDirection,
   TestSubject,
   TestTopic,
+  Rating
 } from "./panels";
 import { DEFAULT_VIEW_PANELS } from "./routes";
 
@@ -48,6 +49,7 @@ export const App = () => {
           <TestDirection id="testDirection" />
           <TestSubject id="testSubject" />
           <TestTopic id="testTopic" />
+          <Rating id="rating" />
         </View>
       </SplitCol>
       {popout}

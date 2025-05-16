@@ -9,3 +9,4 @@ export { Tests } from "./Tests";
 export { TestDirection } from "./TestDirection";
 export { TestSubject } from "./TestSubject";
 export { TestTopic } from "./TestTopic";
+export {Rating} from "./Rating";

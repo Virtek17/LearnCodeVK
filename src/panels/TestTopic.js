@@ -1,129 +1,55 @@
+//==========
+// VK импорты
+//==========
 import { Panel, Tabbar, PanelHeader, Button } from "@vkontakte/vkui";
 import PropTypes from "prop-types";
 import { useParams, useRouteNavigator } from "@vkontakte/vk-mini-apps-router";
+import { useAppearance } from "@vkontakte/vk-bridge-react";
+import { Icon20ErrorCircle } from "@vkontakte/icons";
 
+//==========
+// Мои компоненты
+//==========
 import MyTabbar from "../Components/MyTabbar/MyTabbar";
 import Title from "../Components/Title/Title";
 import MainContainer from "../Components/MainContainer/MainContainer";
 import { TestCard } from "../Components/TestCard/TestCard";
 import { BlockedModal } from "../Components/BlockedModal/BlockedModal";
-
+import "../styles/testTopic.css";
+import { useTest } from "../hooks/useTest";
 import kabanNormal from "../assets/Kabans/kaban-busy.svg";
 import kabanAngry from "../assets/Kabans/kaban-angry.svg";
 import kabanGood from "../assets/Kabans/kaban-strong.svg";
-
+//==========
+// React импорты
+//==========
 import { useState } from "react";
 import clsx from "clsx";
-
-import "../styles/testTopic.css";
-import { Icon20ErrorCircle } from "@vkontakte/icons";
-import { useAppearance } from "@vkontakte/vk-bridge-react";
-import { useTest } from "../hooks/useTest";
+import { useUpdateProgress } from "../hooks/useUpdateProgress";
+import { useUser } from "../hooks/useUser";
+import { getTestSubjectId } from "../utils/getTestSubjectId";
 
 export const TestTopic = ({ id }) => {
+  const { user, isLoadings, errors } = useUser(); // получаю юзера
+
   const [activeTest, setActiveTest] = useState(0);
   const { topic, direction, subject } = useParams();
-  const appearance = useAppearance();
-  // const directions = [
-  //   {
-  //     title: "Основы HTML",
-
-  //   {
-  //     title: "Форматирование текста",
-  //     tests: [
-  //       {
-  //         question: "Какой тег делает текст жирным без семантической важности?",
-  //         answer: "<b>",
-  //         variant: ["<b>", "<strong>", "<bold>", "<em>"],
-  //       },
-  //       {
-  //         question: "Чем отличается <strong> от <b>?",
-  //         answer:
-  //           "<strong> указывает на важность текста, <b> — просто жирное начертание",
-  //         variant: [
-  //           "Ничем, это синонимы",
-  //           "<strong> указывает на важность текста, <b> — просто жирное начертание",
-  //           "<b> работает только в старых браузерах",
-  //           "<strong> нельзя использовать внутри <p>",
-  //         ],
-  //       },
-  //       {
-  //         question:
-  //           "Какой тег делает текст курсивом без семантического акцента?",
-  //         answer: "<i>",
-  //         variant: ["<i>", "<em>", "<italic>", "<cursive>"],
-  //       },
-  //       {
-  //         question: "Когда стоит использовать <em>?",
-  //         answer: "Для текста, который нужно интонационно выделить",
-  //         variant: [
-  //           "Для всех курсивных слов",
-  //           "Только внутри таблиц",
-  //           "Для цитат",
-  //           "Для текста, который нужно интонационно выделить",
-  //         ],
-  //       },
-  //       {
-  //         question: "Какой тег подчёркивает текст?",
-  //         answer: "<u>",
-  //         variant: ["<ins>", "<u>", "<underline>", "<strike>"],
-  //       },
-  //       {
-  //         question: "Какой тег зачёркивает текст?",
-  //         answer: "<s>",
-  //         variant: ["<s>", "<del>", "<strike>", "<u>"],
-  //       },
-  //       {
-  //         question:
-  //           "Какой тег создаёт верхний индекс (например, степень числа)?",
-  //         answer: "<sup>",
-  //         variant: ["<top>", "<sub>", "<up>", "<sup>"],
-  //       },
-  //       {
-  //         question: "Какой тег используют для химических формул (H₂O)?",
-  //         answer: "<sub>",
-  //         variant: ["<sup>", "<sub>", "<low>", "<chem>"],
-  //       },
-  //       {
-  //         question: "Какой тег сохраняет пробелы и переносы строк?",
-  //         answer: "<pre>",
-  //         variant: ["<pre>", "<code>", "<p>", "<plaintext>"],
-  //       },
-  //       {
-  //         question: "Какой тег используется для цитирования длинного текста?",
-  //         answer: "<blockquote>",
-  //         variant: ["<p>", "<cite>", "<blockquote>", "<q>"],
-  //       },
-  //       {
-  //         question: "Какой тег выделяет код программы?",
-  //         answer: "<code>",
-  //         variant: ["<program>", "<pre>", "<code>", "<script>"],
-  //       },
-  //       {
-  //         question: "Какой код правильно оформляет текст: 'Важно: 2³ = 8'?",
-  //         answer: "<p><strong>Важно:</strong> 2<sup>3</sup> = 8</p>",
-  //         variant: [
-  //           "<strong>Важно: 2<sup>3</sup> = 8</strong>",
-  //           "<p><strong>Важно:</strong> 2<sup>3</sup> = 8</p>",
-  //           "<b>Важно: 2<up>3</up> = 8</b>",
-  //           "<em>Важно: 2<sub>3</sub> = 8</em>",
-  //         ],
-  //       },
-  //     ],
-  //   },
-  // ];
-
-  // const theme = directions.find((item) => item.title === topic);
-
   const [checked, setChecked] = useState(false); // выбрали вариант ответа
   const [uncorrectedAnswersCount, setUncorrectedAnswersCount] = useState(0);
-  const routeNavigator = useRouteNavigator();
 
   const { tests, isLoading, error, countTests } = useTest(topic);
-  console.log(topic);
+  const { updateProgress } = useUpdateProgress();
+
+  const [canNext, setCanNext] = useState(true);
+  const routeNavigator = useRouteNavigator();
+  const appearance = useAppearance();
 
   const handleUncorrectAnswer = (count) => {
     setUncorrectedAnswersCount(count);
+  };
+
+  const handleCanNext = (can) => {
+    setCanNext(can);
   };
 
   // проверить ответ
@@ -156,7 +82,7 @@ export const TestTopic = ({ id }) => {
     <Panel id={id}>
       <PanelHeader>Тесты</PanelHeader>
       <Title title={topic} />
-      <MainContainer>
+      <MainContainer className="testContainer">
         {countTests > activeTest ? (
           <>
             <div className="test-header">
@@ -177,9 +103,11 @@ export const TestTopic = ({ id }) => {
               variant={tests[activeTest].variant}
               checked={checked}
               onUncorrectedAnswer={handleUncorrectAnswer} // передаем callback
+              handleCanNext={handleCanNext}
             />
             <Button
-              stretched
+              className="mainBtn"
+              disabled={canNext}
               onClick={() => (checked ? nextQuestion() : checkAnswer())}
             >
               {checked ? "Далее" : "Проверить"}
@@ -222,16 +150,31 @@ export const TestTopic = ({ id }) => {
                 Чекнуть теорию
               </div>
             </div>
-            <div className="btns">
-              <Button
-                stretched
-                onClick={() =>
-                  routeNavigator.push(`/tests/${direction}/${subject}`)
-                }
-              >
-                Перейти к следующей теме
-              </Button>
-            </div>
+            {procentCorrectAnswer >= 90 ? (
+              // прошел хоршо -> кидает на следующий тест и запись в бд
+              <div className="btns">
+                <Button
+                  stretched
+                  onClick={async () => {
+                    const subjectId = await getTestSubjectId(topic); // получаем ID темы
+                    await updateProgress(user.id, subjectId);
+                    routeNavigator.push(`/tests/${direction}/${subject}`);
+                  }}
+                >
+                  Перейти к следующей теме
+                </Button>
+              </div>
+            ) : (
+              // если прошел плохо -> кидает на теорию
+              <div className="btns">
+                <Button
+                  stretched
+                  onClick={() => routeNavigator.push(`/theory`)}
+                >
+                  Пойти готовиться
+                </Button>
+              </div>
+            )}
           </div>
         )}
       </MainContainer>

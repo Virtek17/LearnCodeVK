@@ -4,7 +4,7 @@ import clsx from "clsx";
 import { Icon28LockOutline } from "@vkontakte/icons";
 import { useAppearance } from "@vkontakte/vk-bridge-react";
 
-const SimpleTile = ({ title, block = true, onClick }) => {
+const SimpleTile = ({ title, block = false, onClick }) => {
   const appearance = useAppearance();
 
   return (

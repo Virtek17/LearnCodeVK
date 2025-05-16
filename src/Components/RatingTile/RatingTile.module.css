@@ -1,0 +1,54 @@
+@import "../../styles/variables.css";
+
+.wrapper {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  font-family: SFProText;
+}
+
+.wrapper__light {
+  background-color: var(--color-light-modal--head);
+  border: 0.5px solid var(--color-light-border);
+}
+
+.wrapper__dark {
+  background-color: var(--color-dark-modal-head);
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.number {
+  font-size: 24px;
+}
+.number__light {
+  color: var(--color-light-accent);
+}
+.number__dark {
+  color: var(--color-dark-accent);
+}
+.photo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.name {
+}
+
+.points {
+  font-weight: 600;
+}

@@ -10,6 +10,7 @@ export const TestCard = ({
   variant,
   checked,
   onUncorrectedAnswer,
+  handleCanNext,
 }) => {
   const appearance = useAppearance();
   const [selectedOption, setSelectedOption] = useState(null);
@@ -18,11 +19,13 @@ export const TestCard = ({
   const handleOptionChange = (index) => {
     if (!checked) {
       setSelectedOption(index);
+      handleCanNext(false);
     }
   };
   useEffect(() => {
     if (checked === false) {
       setSelectedOption(null);
+      handleCanNext(true);
     }
     if (isWrongAnswerSelected === true) {
       let newCount = countUncorrectAnswer + 1;
@@ -41,7 +44,6 @@ export const TestCard = ({
 
   return (
     <div className={style.testCard}>
-      {/* <span>Количество ошибок: {countUncorrectAnswer}</span> */}
       <div
         className={clsx(style.question, {
           [style.question__light]: appearance === "light",
@@ -100,4 +102,5 @@ TestCard.propTypes = {
   variant: PropTypes.array,
   checked: PropTypes.bool,
   onUncorrectedAnswer: PropTypes.func,
+  handleCanNext: PropTypes.func,
 };

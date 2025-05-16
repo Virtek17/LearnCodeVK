@@ -9,82 +9,39 @@ import { Icon24ChevronLeftOutline } from "@vkontakte/icons";
 import clsx from "clsx";
 import { useTestSubject } from "../hooks/useTestSubject";
 import { MiniSkeleton } from "../Components/Skeletons/MiniSkeleton/MiniSkeleton";
+import { useUser } from "../hooks/useUser";
+import { useEffect, useState } from "react";
+import { useGetUserProgress } from "../hooks/useGetUserProgress";
+import { useGetUserId } from "../hooks/useGetUserId";
 
 export const TestSubject = ({ id }) => {
+  const { userId } = useGetUserId();
   const { direction, subject } = useParams(); // Получаем тему из URL
   const routeNavigator = useRouteNavigator();
-  // const directions = [
-  //   {
-  //     title: "HTML",
-  //     text: "Основы HTML",
-  //     block: false,
-  //   },
-  //   {
-  //     title: "HTML",
-  //     text: "Форматирование текста",
-  //     block: false,
-  //   },
-  //   {
-  //     title: "HTML",
-  //     text: "Ссылки и изображения",
-  //     block: true,
-  //   },
-  //   {
-  //     title: "HTML",
-  //     text: "Списки",
-  //     block: true,
-  //   },
-  //   {
-  //     title: "HTML",
-  //     text: "Таблицы",
-  //     block: true,
-  //   },
-  //   {
-  //     title: "HTML",
-  //     text: "Формы",
-  //     block: true,
-  //   },
-  //   {
-  //     title: "HTML",
-  //     text: "Семантическая вёрстка",
-  //     block: true,
-  //   },
-  //   {
-  //     title: "HTML",
-  //     text: "Мультимедиа и интерактивные элементы",
-  //     block: true,
-  //   },
-  //   {
-  //     title: "HTML",
-  //     text: "Мета-информация и SEO",
-  //     block: true,
-  //   },
-  //   {
-  //     title: "HTML",
-  //     text: "Доступность (ARIA)",
-  //     block: true,
-  //   },
-  //   {
-  //     title: "CSS",
-  //     text: "Тема 1 по css",
-  //     block: false,
-  //   },
-  //   {
-  //     title: "JavaScipt",
-  //     text: "Тема 1 по js",
-  //     block: false,
-  //   },
-  // ];
-
-  // const theme = directions.find((item) => item.title === subject);
-  // const needDirection = directions.filter((item) => item.title === subject);
+  console.log(userId);
+  const { tests } = useGetUserProgress(userId);
+  console.log(tests);
+  const [filteredTests, setFilteredTests] = useState([]);
 
   const { testSubject, isLoading, error } = useTestSubject(subject);
-  console.log(testSubject);
+  // console.log("tests: ", tests);
+  // console.log("testSubject: ", testSubject);
 
-  // if (!theme) {
-  //   return <BlockedModal />;
-  // }
+  useEffect(() => {
+    if (!tests || !testSubject || !Array.isArray(testSubject.test_subject))
+      return;
+
+    // Получаем набор нужных текстов из testSubject.test_subject
+    const allowedTexts = new Set(
+      testSubject.test_subject.map((item) => item.text)
+    );
+
+    // Фильтруем исходный массив
+    const filteredTests = tests.filter((test) => allowedTexts.has(test.text));
+
+    console.log("Отфильтрованные тесты:", filteredTests);
+    setFilteredTests(filteredTests);
+  }, [tests, testSubject]);
 
   if (isLoading) {
     return (
@@ -112,18 +69,28 @@ export const TestSubject = ({ id }) => {
         >
           <span className={clsx("btn")}>Назад</span>
         </Button>
-        {testSubject.test_subject.map(({ text, block }) => (
-          <SimpleTile
-            key={text}
-            title={text}
-            block={block}
-            onClick={() => {
-              if (block) {
-                routeNavigator.push(`/tests/${direction}/${subject}/${text}`);
-              }
-            }}
-          />
-        ))}
+
+        {filteredTests.map((test) => {
+          const { text, user_test_progress } = test;
+          const progress = user_test_progress[0]; // Первый элемент массива user_test_progress
+
+          return (
+            <SimpleTile
+              key={text}
+              title={text}
+              block={!progress.is_passed} // Используем is_passed как блокировку
+              onClick={() => {
+                if (progress.is_passed) {
+                  routeNavigator.push(`/tests/${direction}/${subject}/${text}`);
+                }
+              }}
+            />
+          );
+        })}
+
+        {!testSubject?.test_subject?.length && !isLoading && (
+          <div>Нет доступных тестов по этой теме</div>
+        )}
       </MainContainer>
       <Tabbar>
         <MyTabbar />

@@ -12,7 +12,6 @@ export const PhraseDay = () => {
   if (isLoading) return <div>Заргрузка...</div>;
   if (error) return <div>Ошибка!</div>;
 
-  console.log(phrase);
   return (
     <div className={style.wrapper}>
       <div

@@ -14,22 +14,25 @@ export const useUser = () => {
 
         // 1. Поулчаем данные из VK
         const vkData = await bridge.send("VKWebAppGetUserInfo", {});
-        console.log("vkData: ", vkData);
 
         // 2. Проверяем есть ли пользователь в бд
         let dbUser = await userApi.getUser(vkData.id);
-        console.log("dbUser первая проверка: ", dbUser);
+        // console.log("dbUser первая проверка: ", dbUser);
+
         // 3. Если нет - создаем
         if (!dbUser) {
-          console.log("Пользователь еще не создан, идет создание...");
+          // console.log("Пользователь еще не создан, идет создание...");
           dbUser = await userApi.createUser({
             id: vkData.id,
             name: vkData.first_name,
             photo: vkData.photo_200,
           });
+          // console.log("dbUser после создания", dbUser);
+
+          // 4. Инициализируем прогресс для нового пользователя
+          await userApi.initializeProgressForUser(dbUser.id);
         }
         setUser(dbUser);
-        console.log("dbUser после создания", dbUser);
       } catch (error) {
         setError(error);
       } finally {

@@ -14,45 +14,7 @@ export const TestDirection = ({ id }) => {
   const { direction } = useParams(); // Получаем тему из URL
 
   const routeNavigator = useRouteNavigator();
-  // const directions = [
-  //   {
-  //     direction: "Frontend",
-  //     title: "HTML",
-  //     block: false,
-  //   },
-  //   {
-  //     direction: "Frontend",
-  //     title: "CSS",
-  //     block: true,
-  //   },
-  //   {
-  //     direction: "Frontend",
-  //     title: "JavaScript",
-  //     block: true,
-  //   },
-  //   {
-  //     direction: "Backend",
-  //     title: "PHP",
-  //     block: true,
-  //   },
-  //   {
-  //     direction: "Backend",
-  //     title: "SQL",
-  //     block: true,
-  //   },
-  //   {
-  //     direction: "Backend",
-  //     title: "Wordpress",
-  //     block: true,
-  //   },
-  // ];
   const { testLang, isLoading, error } = useTestLang(direction);
-  console.log(testLang);
-
-  // const theme = directions.find((item) => item.direction === direction);
-  // const needDirection = directions.filter(
-  //   (item) => item.direction === direction
-  // );
 
   if (isLoading) {
     return (
@@ -80,23 +42,13 @@ export const TestDirection = ({ id }) => {
         >
           <span className={clsx("btn")}>Назад</span>
         </Button>
-        {testLang.test_lang.map(({ lang, block }) => (
+        {testLang.test_lang.map(({ lang }) => (
           <SimpleTile
             key={lang}
             title={lang}
-            block={block}
             onClick={() => routeNavigator.push(`/tests/${direction}/${lang}`)}
           />
         ))}
-
-        {/* {direction.map(({ title, block }) => (
-          <SimpleTile
-            key={title}
-            title={title}
-            block={block}
-            onClick={() => routeNavigator.push(`/tests/${direction}/${title}`)}
-          />
-        ))} */}
       </MainContainer>
       <Tabbar>
         <MyTabbar />

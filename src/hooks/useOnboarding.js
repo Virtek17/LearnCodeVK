@@ -14,7 +14,6 @@ export const useOnboarding = () => {
   }, []);
 
   const completeOnboarding = () => {
-    console.log("ВЫЗОВ ФУНКЦИИ");
     // Сохраняем, что онбординг завершён
     localStorage.setItem("onboardCompleted", "true");
     setIsShow(false); // Закрываем онбординг
