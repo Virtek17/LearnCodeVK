@@ -27,7 +27,7 @@ const MainHeader = ({ day, place }) => {
         <div className={style.icon}>
           <Icon24FireAltOutline />
         </div>
-        {day} дней
+        {day} XP
       </div>
       <div className={style.place}>
         <div className={style.icon}>
@@ -42,6 +42,6 @@ const MainHeader = ({ day, place }) => {
 export default MainHeader;
 
 MainHeader.propTypes = {
-  day: PropTypes.number.isRequired,
-  place: PropTypes.number.isRequired,
+  day: PropTypes.number,
+  place: PropTypes.number,
 };

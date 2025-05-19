@@ -1,32 +1,34 @@
+// hooks/useRating.js
+
 import { useEffect, useState } from "react";
 import { userApi } from "../service/userApi";
+import { useUser } from "./useUser";
 
 export const useRating = () => {
-  const [ratingList, setRatingList] = useState([]);
+  const [ratingData, setRatingData] = useState({
+    top5: [],
+    currentUser: null,
+    isUserInTop5: false,
+  });
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { user } = useUser();
 
   useEffect(() => {
     const fetchRating = async () => {
-      try {
-        setIsLoading(true);
-        const data = await userApi.getUserRating();
+      if (!user?.id) return;
 
-        if (data) {
-          setRatingList(data);
-        } else {
-          setRatingList([]);
-        }
-      } catch (err) {
-        console.error("Ошибка при загрузке рейтинга:", err);
-        setError(err);
+      try {
+        const data = await userApi.getUserRating(user.id);
+        setRatingData(data);
+      } catch (error) {
+        console.error("Ошибка при получении рейтинга:", error);
       } finally {
         setIsLoading(false);
       }
     };
 
     fetchRating();
-  }, []);
+  }, [user]);
 
-  return { ratingList, isLoading, error };
+  return { ratingData, isLoading };
 };

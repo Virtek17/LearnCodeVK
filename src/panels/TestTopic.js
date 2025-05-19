@@ -25,13 +25,19 @@ import kabanGood from "../assets/Kabans/kaban-strong.svg";
 //==========
 import { useState } from "react";
 import clsx from "clsx";
+
+//==========
+// Кастомные хуки и методы
+//==========
 import { useUpdateProgress } from "../hooks/useUpdateProgress";
 import { useUser } from "../hooks/useUser";
 import { getTestSubjectId } from "../utils/getTestSubjectId";
+import { useAddPoints } from "../hooks/useAddPoints";
+
 
 export const TestTopic = ({ id }) => {
-  const { user, isLoadings, errors } = useUser(); // получаю юзера
-
+  const { user } = useUser(); // получаю юзера
+  const {addPointsIfNotReceived} = useAddPoints();
   const [activeTest, setActiveTest] = useState(0);
   const { topic, direction, subject } = useParams();
   const [checked, setChecked] = useState(false); // выбрали вариант ответа
@@ -43,6 +49,7 @@ export const TestTopic = ({ id }) => {
   const [canNext, setCanNext] = useState(true);
   const routeNavigator = useRouteNavigator();
   const appearance = useAppearance();
+
 
   const handleUncorrectAnswer = (count) => {
     setUncorrectedAnswersCount(count);
@@ -77,6 +84,39 @@ export const TestTopic = ({ id }) => {
 
   let correctAnswersCount = countTests - uncorrectedAnswersCount;
   let procentCorrectAnswer = (correctAnswersCount * 100) / countTests;
+
+  const handleSuccessTest = async () => {
+    const subjectId = await getTestSubjectId(topic);
+  
+    const correctAnswersCount = countTests - uncorrectedAnswersCount;
+    const procentCorrectAnswer = (correctAnswersCount * 100) / countTests;
+  
+    // ВСЕГДА обновляем прогресс, если тест пройден успешно
+    if (procentCorrectAnswer >= 90) {
+      try {
+        // Обновляем прогресс — открываем следующий тест
+        await updateProgress(user.id, subjectId);
+      } catch (e) {
+        console.error("Не удалось обновить прогресс:", e.message);
+        // Можно показать ошибку пользователю или предложить повторить
+      }
+    }
+  
+    // Начисляем очки, если ещё не начисляли
+    try {
+      const wasAdded = await addPointsIfNotReceived(user.id, user.points, subjectId);
+  
+      if (wasAdded) {
+        console.log("Вы получили +10 баллов за тест!");
+      } else {
+        console.log("Очки за этот тест уже были начислены.");
+      }
+    } catch (e) {
+      console.error("Не удалось начислить очки:", e.message);
+    }
+  
+    routeNavigator.push(`/tests/${direction}/${subject}`);
+  };
 
   return (
     <Panel id={id}>
@@ -153,14 +193,7 @@ export const TestTopic = ({ id }) => {
             {procentCorrectAnswer >= 90 ? (
               // прошел хоршо -> кидает на следующий тест и запись в бд
               <div className="btns">
-                <Button
-                  stretched
-                  onClick={async () => {
-                    const subjectId = await getTestSubjectId(topic); // получаем ID темы
-                    await updateProgress(user.id, subjectId);
-                    routeNavigator.push(`/tests/${direction}/${subject}`);
-                  }}
-                >
+                <Button stretched onClick={handleSuccessTest}>
                   Перейти к следующей теме
                 </Button>
               </div>

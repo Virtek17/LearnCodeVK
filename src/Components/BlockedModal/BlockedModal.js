@@ -3,7 +3,7 @@ import style from "./BlockedModal.module.css";
 import { useAppearance } from "@vkontakte/vk-bridge-react";
 import { Icon24LockOutline } from "@vkontakte/icons";
 import { Button } from "@vkontakte/vkui";
-import kaban from "../../assets/Kabans/kaban-busy.svg";
+import kaban from "../../assets/Kabans/kaban-stupid.svg";
 import { useRouteNavigator } from "@vkontakte/vk-mini-apps-router";
 export const BlockedModal = () => {
   const appearance = useAppearance();

@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import kaban from "../../assets/Kabans/kaban-busy.svg";
+import kaban from "../../assets/Kabans/kaban-shirt.svg";
 import style from "./PhraseDay.module.css";
 import clsx from "clsx";
 import { useAppearance } from "@vkontakte/vk-bridge-react";

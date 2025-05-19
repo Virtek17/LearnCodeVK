@@ -7,17 +7,27 @@ import MainContainer from "../Components/MainContainer/MainContainer";
 import { PhraseDay } from "../Components/PhraseDay/PhraseDay";
 import { useOnboarding } from "../hooks/useOnboarding";
 import { OnBoard } from "../Components/OnboardCustom/OnBoard";
-import { useRouteNavigator } from "@vkontakte/vk-mini-apps-router";
+import { useUser } from "../hooks/useUser";
+import Loader from "../Components/Loader/Loader";
 
 export const Home = ({ id }) => {
   const { isShow, completeOnboarding } = useOnboarding();
-  const routeNavigator = useRouteNavigator();
+  const { user, isLoading, error } = useUser();
+
+  if (isLoading) {
+    return <Loader/>;
+  }
+
+  if (error) {
+    // TODO: Добавить ошибку
+    return <div>Error: {error.message}</div>;
+  }
+
   return (
     <Panel id={id}>
       <PanelHeader>Главная</PanelHeader>
-      <button onClick={() => routeNavigator.go(`/rating`)}>Рейтинг</button>
       <MainContainer>
-        <MainHeader day={10} place={5} />
+        <MainHeader day={user?.points} place={5} />
         <PhraseDay />
         {isShow && <OnBoard onClose={completeOnboarding} />}
       </MainContainer>

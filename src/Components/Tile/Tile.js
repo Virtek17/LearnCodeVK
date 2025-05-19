@@ -12,6 +12,10 @@ import kabanSmart from "../../assets/Kabans/kaban-smart.svg";
 import kabanStrong from "../../assets/Kabans/kaban-strong.svg";
 import kabanRich from "../../assets/Kabans/kaban-rich.svg";
 import kabanBusy from "../../assets/Kabans/kaban-busy.svg";
+import kabanFast from "../../assets/Kabans/kaban-fast.svg";
+import kabanStupid from "../../assets/Kabans/kaban-stupid.svg";
+import kabanFunny from "../../assets/Kabans/kaban-funny.svg";
+import kabanSmartMustache from "../../assets/Kabans/kaban-smart-mustache.svg";
 
 const imgMap = {
   kabanFrontend,
@@ -22,6 +26,10 @@ const imgMap = {
   kabanStrong,
   kabanRich,
   kabanBusy,
+  kabanFast,
+  kabanStupid,
+  kabanFunny,
+  kabanSmartMustache,
 };
 
 const Tile = ({ title, text, img, progress, maxProgress = null, onClick }) => {

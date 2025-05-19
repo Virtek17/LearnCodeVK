@@ -19,6 +19,11 @@
   background-color: var(--color-dark-modal-head);
 }
 
+.wrapper__currentUser {
+  background-color: var(--vkui--color_background_accent);
+  border: none;
+}
+
 .userInfo {
   display: flex;
   align-items: center;
@@ -34,12 +39,19 @@
 .number {
   font-size: 24px;
 }
+
 .number__light {
   color: var(--color-light-accent);
 }
+
 .number__dark {
   color: var(--color-dark-accent);
 }
+
+.number__currentUser {
+  color: var(--vkui--color_text_contrast);
+}
+
 .photo {
   width: 40px;
   height: 40px;
@@ -47,8 +59,18 @@
 }
 
 .name {
+  color: var(--vkui--color_text_primary);
+}
+
+.wrapper__currentUser .name {
+  color: var(--vkui--color_text_contrast);
 }
 
 .points {
   font-weight: 600;
+  color: var(--vkui--color_text_primary);
+}
+
+.wrapper__currentUser .points {
+  color: var(--vkui--color_text_contrast);
 }

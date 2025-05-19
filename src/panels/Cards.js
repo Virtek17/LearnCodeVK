@@ -7,6 +7,7 @@ import MainContainer from "../Components/MainContainer/MainContainer";
 import { useRouteNavigator } from "@vkontakte/vk-mini-apps-router";
 
 export const Cards = ({ id }) => {
+  const routeNavigator = useRouteNavigator();
   const tiles = [
     {
       title: "html",
@@ -20,7 +21,7 @@ export const Cards = ({ id }) => {
       text: "Стили и оформление",
       countAllCards: 300,
       countFinishCards: 50,
-      img: "kabanBusy",
+      img: "kabanFunny",
     },
     {
       title: "JavaScript",
@@ -31,7 +32,6 @@ export const Cards = ({ id }) => {
     },
   ];
 
-  const routeNavigator = useRouteNavigator();
   return (
     <Panel id={id}>
       <PanelHeader>Карточки</PanelHeader>

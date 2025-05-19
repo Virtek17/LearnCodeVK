@@ -15,6 +15,16 @@ export const userApi = {
     return data || null;
   },
 
+  getUserById: async (id) => {
+    const { data, error } = await supabase
+      .from("user")
+      .select("id")
+      .eq("id", id)
+      .single();
+    if (error) throw new Error(error.message);
+    return data;
+  },
+
   createUser: async (userData) => {
     const { data, error } = await supabase
       .from("user")
@@ -26,20 +36,90 @@ export const userApi = {
     return data;
   },
 
-  getUserRating: async () => {
-    const { data, error } = await supabase
+  getUserRating: async (currentUserId) => {
+    // Получаем ТОП-5 пользователей по очкам
+    const { data: top5, error: top5Error } = await supabase
+    .from("user")
+    .select("id, name, photo, points")
+    .order("points", { ascending: false })
+    .limit(5);
+
+    if (top5Error) throw new Error(top5Error.message);
+
+    // Получаем данные текущего пользователя
+    const { data: currentUser, error: currentUserError } = await supabase
       .from("user")
-      .select("name, photo, points")
-      .order("points", { ascending: false }) // false = от большего к меньшему
-      .limit(5);
+      .select("id, name, photo, points")
+      .eq("id", currentUserId)
+      .single();
 
-    if (error) {
-      console.log(error.message);
-      return null;
-    }
+    if (currentUserError) throw new Error(currentUserError.message);
 
-    return data;
+    // Проверяем, входит ли текущий пользователь в ТОП-5
+    const isUserInTop5 = top5.some((user) => user.id === currentUser.id);
+
+    // Считаем количество пользователей с бОльшим количеством очков
+    const { count, error: countError } = await supabase
+      .from("user")
+      .select("*", { count: "exact", head: true })
+      .gt("points", currentUser.points);
+
+    if (countError) throw new Error(countError.message);
+
+    const currentUserPosition = count + 1;
+
+    return {
+      top5,
+      currentUser: {
+        ...currentUser,
+        position: currentUserPosition,
+      },
+      isUserInTop5,
+    };
   },
+  
+  // начисление баллов юзеру
+  addUserPoints: async (userId, userPoints) => {
+    try {
+      const { error } = await supabase
+        .from("user")
+        .update({ points: userPoints + 10 })
+        .match({ id: userId });
+
+      if (error) throw new Error(error.message);
+      console.log(`Прогресс для юзера ${userId} обновлен`);
+    } catch (error) {
+      console.error("Ошибка при добавлениии баллов ", error.message);
+      throw error;
+    }
+  },
+
+  // проверка получил ля пользователь баллы
+  checkIfPointsReceived: async (userId, testSubjectId) => {
+    const {data, error} = await supabase 
+      .from("user_test_progress")
+      .select("has_received_points")
+      .match({ user_id: userId, test_subject_id: testSubjectId })
+      .single();
+
+    if (error && error.code !== "PGRST116") {
+      throw new Error(error.message);
+    }
+  
+    return data?.has_received_points || false
+  },
+
+  // пометка что награда получена
+  markPointsAsReceived: async (userId, testSubjectId) => {
+    const { error } = await supabase
+      .from("user_test_progress")
+      .update({ has_received_points: true })
+      .match({ user_id: userId, test_subject_id: testSubjectId });
+  
+    if (error) throw new Error(error.message);
+    console.log("Пользователь отмечен как получивший награду");
+  },
+
 
   // Два метода не трогать
   initializeProgressForUser: async (userId) => {
